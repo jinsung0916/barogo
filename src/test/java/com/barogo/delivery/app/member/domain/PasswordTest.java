@@ -4,8 +4,21 @@ import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 class PasswordTest {
+
+    private final PasswordEncoder encoder = new PasswordEncoder() {
+        @Override
+        public String encode(CharSequence rawPassword) {
+            return rawPassword.toString();
+        }
+
+        @Override
+        public boolean matches(CharSequence rawPassword, String encodedPassword) {
+            return false;
+        }
+    };
 
     @Test
     @DisplayName("비밀번호를 생성한다.")
@@ -16,6 +29,7 @@ class PasswordTest {
         // When
         Password password = Password.builder()
                 .password(passwordString)
+                .encoder(encoder)
                 .build();
 
         // Then
@@ -32,6 +46,7 @@ class PasswordTest {
         ThrowableAssert.ThrowingCallable callable = () -> {
             Password.builder()
                     .password(passwordString)
+                    .encoder(encoder)
                     .build();
         };
 
@@ -49,6 +64,7 @@ class PasswordTest {
         ThrowableAssert.ThrowingCallable callable = () -> {
             Password.builder()
                     .password(passwordString)
+                    .encoder(encoder)
                     .build();
         };
 
