@@ -22,6 +22,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.apache.commons:commons-lang3:3.12.0")
 }
 
 tasks.withType<Test> {
