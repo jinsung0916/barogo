@@ -33,12 +33,13 @@ class DeliveryRepositoryTest {
     @Test
     void findByRegisteredTimeBetween() {
         // Given
+        Long memberId = 0L;
         LocalDateTime start = LocalDateTime.of(LocalDate.of(2023, 3, 1), LocalTime.MIN);
         LocalDateTime end = LocalDateTime.of(LocalDate.of(2023, 3, 3), LocalTime.MIN);
         Pageable pageable = Pageable.unpaged();
 
         // When
-        Page<Delivery> deliveryList = deliveryRepository.findByRegisteredTimeBetween(start, end, pageable);
+        Page<Delivery> deliveryList = deliveryRepository.findByMemberIdAndRegisteredTimeBetween(memberId, start, end, pageable);
 
         // Then
         Assertions.assertThat(deliveryList.getSize()).isEqualTo(3);
@@ -57,7 +58,7 @@ class DeliveryRepositoryTest {
                                 .build()
                 )
                 .build();
-        Long memberId = 1L;
+        Long memberId = 0L;
 
         return Delivery.builder()
                 .registeredTime(registeredTime)

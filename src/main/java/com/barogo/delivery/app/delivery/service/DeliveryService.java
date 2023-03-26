@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Validated
 public interface DeliveryService {
 
-    Page<Delivery> getList(@NotNull LocalDateTime start, @NotNull LocalDateTime end, @NotNull Pageable pageable);
+    Page<Delivery> getList(@NotNull Long memberId, @NotNull LocalDateTime start, @NotNull LocalDateTime end, @NotNull Pageable pageable);
 
     @PostAuthorize("#authentication.name == returnObject.memberId")
     Delivery updateAddress(@NotNull Long deliveryId, @NotNull DeliveryAddress newAddress);

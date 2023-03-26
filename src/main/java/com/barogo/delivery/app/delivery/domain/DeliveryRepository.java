@@ -8,6 +8,6 @@ import java.time.LocalDateTime;
 
 public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
 
-    Page<Delivery> findByRegisteredTimeBetween(LocalDateTime start, LocalDateTime end, Pageable pageable);
+    Page<Delivery> findByMemberIdAndRegisteredTimeBetween(Long memberId, LocalDateTime start, LocalDateTime end, Pageable pageable);
 
 }

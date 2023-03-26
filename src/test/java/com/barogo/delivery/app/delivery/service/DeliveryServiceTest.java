@@ -56,7 +56,7 @@ class DeliveryServiceTest {
                                         .build()
                         )
                 );
-        given(deliveryRepository.findByRegisteredTimeBetween(any(), any(), any()))
+        given(deliveryRepository.findByMemberIdAndRegisteredTimeBetween(any(), any(), any(), any()))
                 .willReturn(Page.empty());
     }
 
@@ -64,12 +64,13 @@ class DeliveryServiceTest {
     @DisplayName("배달 리스트를 조회한다.")
     void getList() {
         // Given
+        Long memberId = 0L;
         LocalDateTime start = LocalDateTime.now();
         LocalDateTime end = LocalDateTime.now();
         Pageable pageable = Pageable.unpaged();
 
         // When
-        Page<Delivery> deliveries = deliveryService.getList(start, start, pageable);
+        Page<Delivery> deliveries = deliveryService.getList(memberId, start, end, pageable);
 
         // Then
         Assertions.assertThat(deliveries.getSize()).isEqualTo(0);

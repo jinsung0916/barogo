@@ -18,8 +18,8 @@ public class DeliveryServiceImpl implements DeliveryService {
     private final DeliveryRepository deliveryRepository;
 
     @Transactional(readOnly = true)
-    public Page<Delivery> getList(LocalDateTime start, LocalDateTime end, Pageable pageable) {
-        return deliveryRepository.findByRegisteredTimeBetween(start, end, pageable);
+    public Page<Delivery> getList(Long memberId, LocalDateTime start, LocalDateTime end, Pageable pageable) {
+        return deliveryRepository.findByMemberIdAndRegisteredTimeBetween(memberId, start, end, pageable);
     }
 
     public Delivery updateAddress(Long deliveryId, DeliveryAddress newAddress) {

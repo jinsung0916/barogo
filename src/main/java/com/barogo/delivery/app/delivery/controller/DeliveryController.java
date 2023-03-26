@@ -18,10 +18,10 @@ public class DeliveryController {
 
     @GetMapping
     public Page<Delivery> get(
-            GetListCommand command,
+            @Valid GetListCommand command,
             Pageable pageable
     ) {
-        return deliveryService.getList(command.getStart(), command.getEnd(), pageable);
+        return deliveryService.getList(command.getMemberId(), command.getStart(), command.getEnd(), pageable);
     }
 
     @PutMapping("/{id}/address")

@@ -46,7 +46,7 @@ class DeliveryControllerTest {
 
     @BeforeEach
     void beforeEach() {
-        given(deliveryService.getList(any(), any(), any()))
+        given(deliveryService.getList(any(), any(), any(), any()))
                 .willReturn(Page.empty());
 
         given(deliveryService.updateAddress(any(), any()))
@@ -74,6 +74,7 @@ class DeliveryControllerTest {
     void getListTest() throws Exception {
         // Given
         GetListCommand command = GetListCommand.builder()
+                .memberId(0L)
                 .start(LocalDateTime.now())
                 .end(LocalDateTime.now())
                 .build();
